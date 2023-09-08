@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Mementos Demo - JQuery Code</title>
+    <script src="https://code.jquery.com/jquery-3.1.0.js" integrity="sha256-slogkvB1K3VOkzAI8QITxV3VzpOnkeNVsKvtkYLMjfk=" crossorigin="anonymous"></script>
+</head>
+<script type="application/javascript">
+    $(document).ready(function(){
+        var checkpoints=[];
+        //tab choosing block
+        $('#div2, #div3').hide();
+        $('#tableTab').css("font-weight","bold");
+        $('.tab').on('click',function(){
+            var id = $(this).attr('id');
+            $('.tab').css("font-weight","normal");
+            if(id === 'tableTab'){
+                $(this).css("font-weight","bold");
+                $('#div1').show();
+                $('#div2').hide();
+                $('#div3').hide();
+            } else if(id === 'listTab'){
+                $(this).css("font-weight","bold");
+                $('#div2').show();
+                $('#div1').hide();
+                $('#div3').hide();
+            } else if(id === 'selectTab'){
+                $(this).css("font-weight","bold");
+                $('#div3').show();
+                $('#div2').hide();
+                $('#div1').hide();
+            }
+        });
+
+        // text add block
+        $("#createTable").on('click', function () {
+            checkpoints.push($('#content').html());
+            var title = $('#tableTitle').val();
+            var border = $('#tableBorderSize').children(':selected').text();
+            var rows = $('#tableRows').children(':selected').text();
+            var columns = $('#tableColumns').children(':selected').text();
+            var table = document.createElement('table');
+            table.setAttribute("border", border);
+            table.setAttribute("cellPadding", "25");
+            if('' != title+'') {
+                var tr = document.createElement('tr');
+                var th = document.createElement('th');
+                th.setAttribute("colspan", columns);
+                th.appendChild(document.createTextNode(title));
+                tr.appendChild(th);
+                table.appendChild(th);
+            }
+            for(var i=0; i < rows; i++){
+                var tr = document.createElement('tr');
+                for(var j=0; j < columns; j++){
+                    var td = document.createElement('td');
+                    tr.appendChild(td);
+                }
+                table.appendChild(tr);
+            }
+            var style = '';
+            if($('#tableFill').is(':checked')){
+                style += 'background-color: dimgray; ';
+            }
+            if($('#tableShadow').is(':checked')){
+                style += 'box-shadow: 5px 5px 5px #888888; ';
+            }
+            if($('#tableBorder').is(':checked')){
+                style += 'border: thin solid black; ';
+            }
+            if(style != '') {
+                var div = document.createElement('div');
+                div.setAttribute("style",style);
+                div.appendChild(table);
+                $('#content').append(div);
+            } else {
+                $('#content').append(table);
+            }
+        });
+
+        $("#createList").on('click', function () {
+            checkpoints.push($('#content').html());
+            var title = $('#listTitle').val();
+            var items = $('#listItems').children(':selected').text();
+            if('' != title+'') {
+                $('#content').append(document.createTextNode(title));
+            }
+            var ul = document.createElement('ul');
+            for(var i=0; i < items; i++){
+                var li = document.createElement('li');
+                li.appendChild(document.createTextNode("List Item "+(i+1)));
+                ul.appendChild(li);
+            }
+            var style = '';
+            if($('#listFill').is(':checked')){
+                style += 'background-color: dimgray; ';
+            }
+            if($('#listShadow').is(':checked')){
+                style += 'box-shadow: 5px 5px 5px #888888; ';
+            }
+            if($('#listBorder').is(':checked')){
+                style += 'border: thin solid black; ';
+            }
+            if(style != '') {
+                var div = document.createElement('div');
+                div.setAttribute("style",style);
+                div.appendChild(ul);
+                $('#content').append(div);
+            } else {
+                $('#content').append(ul);
+            }
+        });
+
+        $("#createSelect").on('click', function () {
+            checkpoints.push($('#content').html());
+            var title = $('#selectTitle').val();
+            var opts = $('#selectOpts').children(':selected').text();
+            if('' != title+'') {
+                $('#content').append(document.createTextNode(title));
+                $('#content').append(document.createElement('br'));
+            }
+            var select = document.createElement('select');
+            for(var i=0; i < opts; i++){
+                var opt = document.createElement('option');
+                opt.appendChild(document.createTextNode("Option Item "+(i+1)));
+                select.appendChild(opt);
+            }
+            var style = '';
+            if($('#selectFill').is(':checked')){
+                style += 'background-color: green; ';
+            }
+            if($('#selectShadow').is(':checked')){
+                style += 'box-shadow: 5px 5px 5px #888888; ';
+            }
+            if($('#selectBorder').is(':checked')){
+                style += 'border: thin solid black; ';
+            }
+            if(style != '') {
+                var div = document.createElement('div');
+                div.setAttribute("style",style);
+                div.appendChild(select);
+                $('#content').append(div);
+            } else {
+                $('#content').append(select);
+            }
+            $('#content').append(document.createElement('br'));
+        });
+
+        $("#clear").on('click', function() {
+            $('#content').empty();
+        });
+
+        $("#undo").on('click', function() {
+            if(checkpoints.length == 0) {
+                $('#content').empty();
+            } else {
+                $('#content').html(checkpoints.pop());
+            }
+        });
+
+    });
+</script>
+<body>
+<h1>Mementos Demo - JQuery Code</h1>
+<a id="tableTab" class="tab" href="#">Table</a>
+| <a id="listTab" class="tab" href="#">List</a>
+| <a id="selectTab" class="tab" href="#">Select</a>
+<hr/>
+<div id="div1">
+    Title:
+    <input type="text" id="tableTitle"/>
+    Border:
+    <select id="tableBorderSize">
+        <option value="1">1</option>
+        <option value="4">4</option>
+        <option value="8">8</option>
+        <option value="16">16</option>
+    </select>
+    Rows:
+    <select id="tableRows">
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+        <option value="6">6</option>
+        <option value="7">7</option>
+        <option value="8">8</option>
+    </select>
+    Columns:
+    <select id="tableColumns">
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+        <option value="6">6</option>
+        <option value="7">7</option>
+        <option value="8">8</option>
+    </select>
+    <input type="checkbox" id="tableBorder">Border
+    <input type="checkbox" id="tableShadow">Shadow
+    <input type="checkbox" id="tableFill">Fill
+    <input type="button" id="createTable" value="Create Table"/>
+</div>
+<div id="div2">
+    Title:
+    <input type="text" id="listTitle"/>
+    Items:
+    <select id="listItems">
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+        <option value="6">6</option>
+        <option value="7">7</option>
+        <option value="8">8</option>
+    </select>
+    <input type="checkbox" id="listBorder">Border
+    <input type="checkbox" id="listShadow">Shadow
+    <input type="checkbox" id="listFill">Fill
+    <input type="button" id="createList" value="Create List"/>
+</div>
+<div id="div3">
+    Title:
+    <input type="text" id="selectTitle"/>
+    Options:
+    <select id="selectOpts">
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+        <option value="6">6</option>
+        <option value="7">7</option>
+        <option value="8">8</option>
+    </select>
+    <input type="checkbox" id="selectBorder">Border
+    <input type="checkbox" id="selectShadow">Shadow
+    <input type="checkbox" id="selectFill">Fill
+    <input type="button" id="createSelect" value="Create Select"/>
+</div>
+<hr/>
+<input type="button" id="clear" value="Clear"/> | <input type="button" id="undo" value="Undo"/>
+<div id="content"/>
+</body>
+</html>

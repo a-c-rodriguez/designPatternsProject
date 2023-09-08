@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Observers Demo - ES2015</title>
+</head>
+<body>
+<h1>Observers Demo - ES2015</h1>
+<a id="tableTab" class="tab" href="#">Table</a>
+| <a id="listTab" class="tab" href="#">List</a>
+| <a id="selectTab" class="tab" href="#">Select</a>
+| <a id="textAreaTab" class="tab" href="#">TextArea</a>
+<hr/>
+<div id="div1">
+    <table id="table1">
+        <tbody>
+        <tr><td>Table Data 1</td></tr>
+        </tbody>
+    </table>
+</div>
+<div id="div2">
+    <ul id="list1">
+        <li>List Data 1</li>
+    </ul>
+</div>
+<div id="div3">
+    <select id="selectbox1">
+        <option>Option 1</option>
+    </select>
+</div>
+<div id="div4">
+    <textarea id="textarea1"></textarea>
+</div>
+<hr/>
+<input type="text" id="text1"/>
+<input type="button" id="addButton" value="Add"/>
+<script src="../../jspm_packages/system.js"></script>
+<script src="../../config.js"></script>
+<script>
+    System.import('./lib/main.js');
+</script>
+</body>
+</html>

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Decorators Demo - ES2015</title>
+</head>
+<body>
+<h1>Decorators Demo - ES2015</h1>
+<a id="tableTab" class="tab" href="#">Table</a>
+| <a id="listTab" class="tab" href="#">List</a>
+| <a id="selectTab" class="tab" href="#">Select</a>
+<hr/>
+<div id="div1">
+    Title:
+    <input type="text" id="tableTitle"/>
+    Border:
+    <select id="tableBorderSize">
+        <option value="1">1</option>
+        <option value="4">4</option>
+        <option value="8">8</option>
+        <option value="16">16</option>
+    </select>
+    Rows:
+    <select id="tableRows">
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+        <option value="6">6</option>
+        <option value="7">7</option>
+        <option value="8">8</option>
+    </select>
+    Columns:
+    <select id="tableColumns">
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+        <option value="6">6</option>
+        <option value="7">7</option>
+        <option value="8">8</option>
+    </select>
+    <input type="checkbox" id="tableBorder">Border
+    <input type="checkbox" id="tableShadow">Shadow
+    <input type="checkbox" id="tableFill">Fill
+    <input type="button" id="createTable" value="Create Table"/>
+</div>
+<div id="div2">
+    Title:
+    <input type="text" id="listTitle"/>
+    Items:
+    <select id="listItems">
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+        <option value="6">6</option>
+        <option value="7">7</option>
+        <option value="8">8</option>
+    </select>
+    <input type="checkbox" id="listBorder">Border
+    <input type="checkbox" id="listShadow">Shadow
+    <input type="checkbox" id="listFill">Fill
+    <input type="button" id="createList" value="Create List"/>
+</div>
+<div id="div3">
+    Title:
+    <input type="text" id="selectTitle"/>
+    Options:
+    <select id="selectOpts">
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+        <option value="6">6</option>
+        <option value="7">7</option>
+        <option value="8">8</option>
+    </select>
+    <input type="checkbox" id="selectBorder">Border
+    <input type="checkbox" id="selectShadow">Shadow
+    <input type="checkbox" id="selectFill">Fill
+    <input type="button" id="createSelect" value="Create Select"/>
+</div>
+<hr/>
+<input type="button" id="clear" value="Clear"/>
+<div id="content"/>
+<script src="../../jspm_packages/system.js"></script>
+<script src="../../config.js"></script>
+<script>
+    System.import('./lib/main.js');
+</script>
+</body>
+</html>

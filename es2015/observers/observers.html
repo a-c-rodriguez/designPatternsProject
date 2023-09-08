@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Observers Demo - JQuery Code</title>
+    <script src="https://code.jquery.com/jquery-3.1.0.js" integrity="sha256-slogkvB1K3VOkzAI8QITxV3VzpOnkeNVsKvtkYLMjfk=" crossorigin="anonymous"></script>
+</head>
+<script type="application/javascript">
+    $(document).ready(function(){
+        //tab choosing block
+        $('#div2, #div3, #div4').hide();
+        $('#tableTab').css("font-weight","bold");
+        $('.tab').on('click',function(){
+            var id = $(this).attr('id');
+            $('.tab').css("font-weight","normal");
+            if(id === 'tableTab'){
+                $(this).css("font-weight","bold");
+                $('#div1').show();
+                $('#div2').hide();
+                $('#div3').hide();
+                $('#div4').hide();
+            } else if(id === 'listTab'){
+                $(this).css("font-weight","bold");
+                $('#div2').show();
+                $('#div1').hide();
+                $('#div3').hide();
+                $('#div4').hide();
+            } else if(id === 'selectTab'){
+                $(this).css("font-weight","bold");
+                $('#div3').show();
+                $('#div2').hide();
+                $('#div1').hide();
+                $('#div4').hide();
+            }
+            else if(id === 'textAreaTab'){
+                $(this).css("font-weight","bold");
+                $('#div4').show();
+                $('#div3').hide();
+                $('#div2').hide();
+                $('#div1').hide();
+            }
+        });
+
+        // text add block
+        $("#addButton").on('click', function () {
+            var data = {val: $('#text1').val()};
+            var select = $('#selectbox1');
+            select.append('<option>' + data.val + '</option>');
+            var list = $('#list1');
+            list.append('<li>' + data.val + '</li>');
+            var table = $('#table1 > tbody:last-child');
+            table.append('<tr><td>' + data.val + '</td></tr>');
+            var textarea = $('#textarea1');
+            var textAreaVal = textarea.val();
+            textarea.val(textAreaVal+data.val+"\n");
+        });
+
+        // text remove block
+        $("#selectbox1").on('change', function () {
+            var data = {val: $(this).children(':selected').text()};
+            var rows = $('#table1 > tbody tr');
+            rows.each(function() {
+                if ($(this).text() === data.val) {
+                    $(this).remove();
+                }
+            });
+            var items = $('#list1 li');
+            items.each(function() {
+                if ($(this).text() === data.val) {
+                    $(this).remove();
+                }
+            });
+            var options = $('#selectbox1 option');
+            options.each(function () {
+                if ($(this).text() === data.val) {
+                    $(this).remove();
+                }
+            });
+            var textarea = $('#textarea1');
+            let textAreaLines = textarea.val().split('\n');
+            var textAreaVal='';
+            for(var line of textAreaLines) {
+                if(line === data.val) {
+                    continue;
+                }
+                textAreaVal += line+'\n';
+            }
+            textarea.val(textAreaVal);
+        });
+    });
+</script>
+<body>
+<h1>Observers Demo - JQuery Code</h1>
+<a id="tableTab" class="tab" href="#">Table</a>
+| <a id="listTab" class="tab" href="#">List</a>
+| <a id="selectTab" class="tab" href="#">Select</a>
+| <a id="textAreaTab" class="tab" href="#">TextArea</a>
+<hr/>
+<div id="div1">
+    <table id="table1">
+        <tbody>
+        <tr><td>Table Data 1</td></tr>
+        </tbody>
+    </table>
+</div>
+<div id="div2">
+    <ul id="list1">
+        <li>List Data 1</li>
+    </ul>
+</div>
+<div id="div3">
+    <select id="selectbox1">
+        <option>Option 1</option>
+    </select>
+</div>
+<div id="div4">
+    <textarea id="textarea1"></textarea>
+</div>
+<hr/>
+<input type="text" id="text1"/>
+<input type="button" id="addButton" value="Add"/>
+</body>
+</html>
